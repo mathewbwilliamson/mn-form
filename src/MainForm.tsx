@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
+import { Error } from "./Error";
 
-// import "./styles.css";
+import "./mainForm.css";
 
 export default function Form() {
   const { register, handleSubmit, formState } = useForm<any, any>();
@@ -20,30 +21,32 @@ export default function Form() {
   console.log("\x1b[43m%s \x1b[0m", "FIXME: [matt] formState", formState);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="main-form" onSubmit={handleSubmit(onSubmit)}>
       <label>First Name</label>
       <input
         type="text"
-        {...register("First Name", { required: true, maxLength: 80 })}
+        {...register("firstName", { required: true, maxLength: 80 })}
       />
-      {errors["First Name"]?.type === "required" && "First Name is required"}
+      <Error errors={errors} name="firstName" label="First Name" />
 
       <label>Last Name</label>
       <input
         type="text"
-        {...register("Last Name", { required: true, maxLength: 100 })}
+        {...register("lastName", { required: true, maxLength: 80 })}
       />
-      {errors["Last Name"]?.type === "required" && "Last Name is required"}
+      <Error errors={errors} name="lastName" label="Last Name" />
 
       <label>Email</label>
       <input
         type="text"
-        {...register("Email", {
+        {...register("email", {
           required: true,
           pattern:
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         })}
       />
+      <Error errors={errors} name="email" label="Email" />
+
       <label>Mobile number</label>
       <input
         type="tel"
@@ -53,28 +56,6 @@ export default function Form() {
           minLength: 8,
         })}
       />
-      {/* <label>Title</label> */}
-      {/* <select
-        {...register("Name", {
-          required: true,
-        })}
-      >
-        <option value="Mr">Mr</option>
-        <option value="Mrs">Mrs</option>
-        <option value="Miss">Miss</option>
-        <option value="Dr">Dr</option>
-      </select>
-      <label>Are you a developer?</label>
-      <input
-        type="radio"
-        value="Yes"
-        {...register("developer", { required: true })}
-      />
-      <input
-        type="radio"
-        value="No"
-        {...register("developer", { required: true })}
-      /> */}
 
       <input type="submit" />
     </form>
