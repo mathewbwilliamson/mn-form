@@ -51,7 +51,6 @@ export default function Form() {
       <label>Child(s) Name (separate by comma for multiple children)</label>
       <input type="text" {...register("childsName", { required: true })} />
       <Error errors={errors} name="childsName" label="Child(s) Name" />
-
       <Input
         name="guardianEmailAddress"
         label="Guardian Email Address"
@@ -59,7 +58,6 @@ export default function Form() {
         register={register}
         validations={{ required: true, pattern: emailAddressRegEx }}
       />
-
       <div className="main-form__grouped-fields">
         <label>Cardholder Name</label>
         <Input
@@ -77,7 +75,6 @@ export default function Form() {
           validations={{ required: true, maxLength: 80 }}
         />
       </div>
-
       <label>Phone number</label>
       <input
         type="tel"
@@ -87,7 +84,6 @@ export default function Form() {
           minLength: 8,
         })}
       />
-
       <input type="submit" />
     </form>
   );
