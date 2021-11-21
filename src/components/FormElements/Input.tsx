@@ -9,6 +9,7 @@ interface InputProps {
   errors: any;
   register: UseFormRegister<any>;
   validations?: RegisterOptions<MainForm>;
+  customErrorMessage?: string;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -17,12 +18,18 @@ export const Input: React.FC<InputProps> = ({
   errors,
   register,
   validations = {},
+  customErrorMessage,
 }) => {
   return (
     <>
       <label>{label}</label>
       <input type="text" {...register(`${name}`, validations)} />
-      <Error errors={errors} name={name} label={label} />
+      <Error
+        errors={errors}
+        name={name}
+        label={label}
+        customErrorMessage={customErrorMessage}
+      />
     </>
   );
 };

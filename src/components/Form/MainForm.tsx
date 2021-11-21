@@ -57,6 +57,7 @@ export default function Form() {
         errors={errors}
         register={register}
         validations={{ required: true, pattern: emailAddressRegEx }}
+        customErrorMessage="Please enter a valid email address"
       />
       <div className="main-form__grouped-fields">
         <label>Cardholder Name</label>
@@ -75,6 +76,19 @@ export default function Form() {
           validations={{ required: true, maxLength: 80 }}
         />
       </div>
+      <Input
+        name="creditCardNumber"
+        label="Credit Card Number"
+        register={register}
+        errors={errors}
+        validations={{
+          required: true,
+          minLength: 13,
+          maxLength: 16,
+          pattern: /[0-9]+/,
+        }}
+        customErrorMessage="Please enter a valid credit card number"
+      />
       <label>Phone number</label>
       <input
         type="tel"
