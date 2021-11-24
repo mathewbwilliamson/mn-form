@@ -4,8 +4,9 @@ import styled from "styled-components";
 import { emailAddressRegEx, scriptURL } from "../../config";
 import { MainForm } from "../../types/mainForm";
 import { AuthorizationCheck } from "../FormElements/AuthorizationCheck";
+import { Button } from "../FormElements/Button";
 import { Input } from "../FormElements/Input";
-import { Label, LargeLabel } from "../FormElements/Label";
+import { LargeLabel } from "../FormElements/Label";
 import { StateSelect } from "../FormElements/StateSelect";
 import "./mainForm.css";
 import { createFormFromData } from "./mainFormUtils";
@@ -117,7 +118,7 @@ export default function Form() {
         <GroupedFieldSpacing />
         <Input
           name="cvv"
-          label="CVV (3 or 4 Digits on Back of Card)"
+          label="CVV (3 or 4 Digits on Back or Front of Card)"
           register={register}
           errors={errors}
           validations={{
@@ -167,7 +168,7 @@ export default function Form() {
 
       <AuthorizationCheck errors={errors} register={register} />
 
-      <input type="submit" />
+      <Button />
     </form>
   );
 }

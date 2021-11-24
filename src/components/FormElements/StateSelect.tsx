@@ -28,7 +28,11 @@ export const StateSelect: React.FC<StateSelectProps> = ({
       <Label>State</Label>
       <Select {...register("billingAddressState", { required: true })}>
         {statesList.map((item) => (
-          <option key={item.abbreviation} value={item.abbreviation}>
+          <option
+            key={item.abbreviation}
+            value={item.abbreviation}
+            selected={item.abbreviation === "FL"}
+          >
             {item.name}
           </option>
         ))}

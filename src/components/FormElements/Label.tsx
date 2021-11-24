@@ -12,5 +12,5 @@ export const LargeLabel = styled.label`
   font-weight: 500;
   font-size: 1.2rem;
   margin-top: 1.5rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.1rem;
 `;
