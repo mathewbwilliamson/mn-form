@@ -16,4 +16,5 @@ export default App;
 
 const Title = styled.h1`
   font-size: 2rem;
+  width: 100vw;
 `;

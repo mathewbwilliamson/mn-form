@@ -20,6 +20,10 @@ const GroupedFields = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 const GroupedFieldSpacing = styled.div`
