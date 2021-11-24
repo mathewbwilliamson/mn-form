@@ -25,7 +25,7 @@ export const AuthorizationCheck: React.FC<AuthorizationCheckProps> = ({
         type="checkbox"
         {...register("authorization", { required: true })}
       />
-      <Label>
+      <Label htmlFor="authorization">
         I authorize Mathnasium® to charge this credit card per our Membership
         Agreement on file.
       </Label>

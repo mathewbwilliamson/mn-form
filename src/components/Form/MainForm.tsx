@@ -11,6 +11,7 @@ import { LargeLabel } from "../FormElements/Label";
 import { StateSelect } from "../FormElements/StateSelect";
 import "./mainForm.css";
 import { createFormFromData } from "./mainFormUtils";
+import { ThankYou } from "./ThankYou";
 
 const GroupedFieldsWithLabel = styled.div`
   display: flex;
@@ -42,6 +43,8 @@ export default function Form() {
   const { register, handleSubmit, formState } = useForm<MainForm>();
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
   const [isSubmitErrored, setIsSubmitErrored] = React.useState<boolean>(false);
+  const [isSubmitComplete, setIsSubmitComplete] =
+    React.useState<boolean>(false);
 
   const { errors } = formState;
 
@@ -56,13 +59,19 @@ export default function Form() {
         headers: { "Content-Type": "multipart/form-data" },
         data: form,
       });
+
+      setIsSubmitComplete(true);
     } catch (e) {
-      console.log("\x1b[41m%s \x1b[0m", "FIXME: [matt] e", e);
+      console.log("\x1b[41m%s \x1b[0m", "The error is", e);
       setIsSubmitErrored(true);
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  if (!isSubmitting && !isSubmitErrored && !!isSubmitComplete) {
+    return <ThankYou />;
+  }
 
   return (
     <form
