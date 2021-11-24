@@ -4,7 +4,7 @@ import { MainForm } from "../../types/mainForm";
 import { Error } from "../FormElements/Error";
 
 interface InputProps {
-  name: string;
+  name: keyof MainForm;
   label: string;
   errors: any;
   register: UseFormRegister<any>;

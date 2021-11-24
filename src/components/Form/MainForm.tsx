@@ -2,10 +2,13 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { emailAddressRegEx, scriptURL } from "../../config";
 import { MainForm } from "../../types/mainForm";
+import { AuthorizationCheck } from "../FormElements/AuthorizationCheck";
 import { Error } from "../FormElements/Error";
 import { Input } from "../FormElements/Input";
+import { StateSelect } from "../FormElements/StateSelect";
 
 import "./mainForm.css";
+import { createFormFromData } from "./mainFormUtils";
 
 export default function Form() {
   const { register, handleSubmit, formState } = useForm<MainForm>();
@@ -14,9 +17,7 @@ export default function Form() {
 
   const onSubmit = async (data: MainForm) => {
     console.log("\x1b[41m%s \x1b[0m", "FIXME: [matt] data", data);
-    const form = new FormData();
-    form.append("firstName", data.firstName);
-    form.append("lastName", data.lastName);
+    const form = createFormFromData(data);
 
     try {
       const req = await axios({
@@ -29,14 +30,6 @@ export default function Form() {
     } catch (e) {
       console.log("\x1b[41m%s \x1b[0m", "FIXME: [matt] e", e);
     }
-
-    // fetch(scriptURL, { method: "POST", body: new FormData(data) })
-    //   .then((resp) => {
-    //     console.log("\x1b[42m%s \x1b[0m", "FIXME: [matt] resp", resp);
-    //   })
-    //   .catch((err) => {
-    //     console.log("\x1b[41m%s \x1b[0m", "FIXME: [matt] err", err);
-    //   });
   };
 
   console.log("ERRORS", errors);
@@ -59,6 +52,7 @@ export default function Form() {
         validations={{ required: true, pattern: emailAddressRegEx }}
         customErrorMessage="Please enter a valid email address"
       />
+
       <div className="main-form__grouped-fields">
         <label>Cardholder Name</label>
         <Input
@@ -89,15 +83,69 @@ export default function Form() {
         }}
         customErrorMessage="Please enter a valid credit card number"
       />
-      <label>Phone number</label>
-      <input
-        type="tel"
-        {...register("phoneNumber", {
+      <div className="main-form__grouped-fields">
+        <Input
+          name="expirationDate"
+          label="Expiration Date (mm/yy)"
+          register={register}
+          errors={errors}
+          validations={{
+            required: true,
+            pattern: /^(0[1-9]|1[0-2])\/?([0-9]{2})$/,
+          }}
+          customErrorMessage="Please enter a valid expiration date"
+        />
+        <Input
+          name="cvv"
+          label="CVV (3 or 4 Digits on Back of Card)"
+          register={register}
+          errors={errors}
+          validations={{
+            required: true,
+            pattern: /^[0-9]{3,4}$/,
+          }}
+          customErrorMessage="Please enter a valid CVV"
+        />
+      </div>
+
+      <label>Billing Address</label>
+      <Input
+        name="billingAddressStreet"
+        label="Street"
+        register={register}
+        errors={errors}
+        validations={{
           required: true,
-          maxLength: 11,
-          minLength: 8,
-        })}
+        }}
       />
+      <div className="main-form__grouped-fields">
+        <Input
+          name="billingAddressCity"
+          label="City"
+          register={register}
+          errors={errors}
+          validations={{
+            required: true,
+            maxLength: 80,
+          }}
+        />
+
+        <StateSelect errors={errors} register={register} />
+        <Input
+          name="billingAddressZipCode"
+          label="Zip Code"
+          register={register}
+          errors={errors}
+          validations={{
+            required: true,
+            pattern: /^[0-9]{5}(?:-[0-9]{4})?$/,
+          }}
+          customErrorMessage="Please enter a valid zip code"
+        />
+      </div>
+
+      <AuthorizationCheck errors={errors} register={register} />
+
       <input type="submit" />
     </form>
   );

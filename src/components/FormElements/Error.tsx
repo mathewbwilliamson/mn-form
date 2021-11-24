@@ -15,7 +15,11 @@ export const Error: React.FC<ErrorProps> = ({
   console.log("\x1b[41m%s \x1b[0m", "FIXME: [matt] errors", errors);
   switch (errors[name]?.type) {
     case "required":
-      return <div>{label} is required</div>;
+      return !!customErrorMessage ? (
+        <div>{customErrorMessage}</div>
+      ) : (
+        <div>{label} is required</div>
+      );
     case "pattern":
       return !!customErrorMessage ? (
         <div>{customErrorMessage}</div>
