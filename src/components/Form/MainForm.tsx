@@ -31,9 +31,17 @@ const GroupedFieldSpacing = styled.div`
   width: 40px;
 `;
 
+const Callout = styled.div`
+  background-color: pink;
+  width: calc(100% - 40px);
+  padding: 20px;
+  margin: 20px 0;
+`;
+
 export default function Form() {
   const { register, handleSubmit, formState } = useForm<MainForm>();
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
+  const [isSubmitErrored, setIsSubmitErrored] = React.useState<boolean>(false);
 
   const { errors } = formState;
 
@@ -50,6 +58,9 @@ export default function Form() {
       });
     } catch (e) {
       console.log("\x1b[41m%s \x1b[0m", "FIXME: [matt] e", e);
+      setIsSubmitErrored(true);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -59,6 +70,12 @@ export default function Form() {
       className="main-form"
       onSubmit={handleSubmit(onSubmit)}
     >
+      {!!isSubmitErrored && (
+        <Callout>
+          There was an error submitting the form. <br />
+          Please contact Mathnasium of New Tampa at 813-644-7282.
+        </Callout>
+      )}
       <Input
         name="childsName"
         label="Child(s) Name (separate by comma for multiple children)"
