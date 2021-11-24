@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const ButtonContainer = styled.input`
   margin: 24px;
@@ -9,9 +9,21 @@ const ButtonContainer = styled.input`
   background-color: black;
   color: white;
   font-weight: 600;
-`;
-interface ButtonProps {}
+  cursor: pointer;
+  border: none;
 
-export const Button: React.FC<ButtonProps> = () => {
-  return <ButtonContainer type="submit" />;
+  ${(props) =>
+    props.disabled &&
+    css`
+      background-color: lightgrey;
+      color: darkgrey;
+      cursor: wait;
+    `}
+`;
+interface ButtonProps {
+  isDisabled: boolean;
+}
+
+export const Button: React.FC<ButtonProps> = ({ isDisabled }) => {
+  return <ButtonContainer type="submit" disabled={isDisabled} />;
 };

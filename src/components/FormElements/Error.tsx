@@ -29,21 +29,27 @@ export const Error: React.FC<ErrorProps> = ({
       );
     case "pattern":
       return !!customErrorMessage ? (
-        <div>{customErrorMessage}</div>
+        <ErrorMessage>{customErrorMessage}</ErrorMessage>
       ) : (
-        <div>{label} is not correct, please enter something valid</div>
+        <ErrorMessage>
+          {label} is not correct, please enter something valid
+        </ErrorMessage>
       );
     case "maxLength":
       return !!customErrorMessage ? (
-        <div>{customErrorMessage}</div>
+        <ErrorMessage>{customErrorMessage}</ErrorMessage>
       ) : (
-        <div>{label} is too long, please enter something valid</div>
+        <ErrorMessage>
+          {label} is too long, please enter something valid
+        </ErrorMessage>
       );
     case "minLength":
       return !!customErrorMessage ? (
-        <div>{customErrorMessage}</div>
+        <ErrorMessage>{customErrorMessage}</ErrorMessage>
       ) : (
-        <div>{label} is too short, please enter something valid</div>
+        <ErrorMessage>
+          {label} is too short, please enter something valid
+        </ErrorMessage>
       );
     default:
       return <></>;

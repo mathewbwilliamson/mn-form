@@ -1,4 +1,5 @@
 import axios from "axios";
+import React from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { emailAddressRegEx, scriptURL } from "../../config";
@@ -32,10 +33,12 @@ const GroupedFieldSpacing = styled.div`
 
 export default function Form() {
   const { register, handleSubmit, formState } = useForm<MainForm>();
+  const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
 
   const { errors } = formState;
 
   const onSubmit = async (data: MainForm) => {
+    setIsSubmitting(true);
     const form = createFormFromData(data);
 
     try {
@@ -172,7 +175,7 @@ export default function Form() {
 
       <AuthorizationCheck errors={errors} register={register} />
 
-      <Button />
+      <Button isDisabled={isSubmitting} />
     </form>
   );
 }
