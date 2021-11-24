@@ -7,5 +7,6 @@
 @media (max-width: 700px) {
   .main-form {
     width: 90vw;
+    margin-bottom: 300px;
   }
 }

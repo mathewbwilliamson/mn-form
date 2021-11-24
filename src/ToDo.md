@@ -7,4 +7,9 @@
   DONE - Make sure it submits to the spreadsheet correctly
 - Write up notes for self on how all of this works
 - Make it responsive
-- Get it uploaded to netlify, it should be secure!
+- Need space on the bottom in responsive for button
+- On submit, show a confirmation page
+- On click, disabled the button
+  DONE - Get it uploaded to netlify, it should be secure!
+  DONE - Rename the netlify location
+- Write up email directions
