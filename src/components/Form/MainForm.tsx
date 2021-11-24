@@ -1,14 +1,29 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import styled from "styled-components";
 import { emailAddressRegEx, scriptURL } from "../../config";
 import { MainForm } from "../../types/mainForm";
 import { AuthorizationCheck } from "../FormElements/AuthorizationCheck";
-import { Error } from "../FormElements/Error";
 import { Input } from "../FormElements/Input";
+import { Label, LargeLabel } from "../FormElements/Label";
 import { StateSelect } from "../FormElements/StateSelect";
-
 import "./mainForm.css";
 import { createFormFromData } from "./mainFormUtils";
+
+const GroupedFieldsWithLabel = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const GroupedFields = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const GroupedFieldSpacing = styled.div`
+  width: 40px;
+`;
 
 export default function Form() {
   const { register, handleSubmit, formState } = useForm<MainForm>();
@@ -16,24 +31,19 @@ export default function Form() {
   const { errors } = formState;
 
   const onSubmit = async (data: MainForm) => {
-    console.log("\x1b[41m%s \x1b[0m", "FIXME: [matt] data", data);
     const form = createFormFromData(data);
 
     try {
-      const req = await axios({
+      await axios({
         method: "post",
         url: scriptURL,
         headers: { "Content-Type": "multipart/form-data" },
         data: form,
       });
-      console.log("\x1b[41m%s \x1b[0m", "FIXME: [matt] req", req);
     } catch (e) {
       console.log("\x1b[41m%s \x1b[0m", "FIXME: [matt] e", e);
     }
   };
-
-  console.log("ERRORS", errors);
-  console.log("\x1b[43m%s \x1b[0m", "FIXME: [matt] formState", formState);
 
   return (
     <form
@@ -41,9 +51,15 @@ export default function Form() {
       className="main-form"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <label>Child(s) Name (separate by comma for multiple children)</label>
-      <input type="text" {...register("childsName", { required: true })} />
-      <Error errors={errors} name="childsName" label="Child(s) Name" />
+      <Input
+        name="childsName"
+        label="Child(s) Name (separate by comma for multiple children)"
+        errors={errors}
+        register={register}
+        validations={{ required: true }}
+        customErrorMessage="Child(s) Name is required"
+      />
+
       <Input
         name="guardianEmailAddress"
         label="Guardian Email Address"
@@ -53,23 +69,26 @@ export default function Form() {
         customErrorMessage="Please enter a valid email address"
       />
 
-      <div className="main-form__grouped-fields">
-        <label>Cardholder Name</label>
-        <Input
-          name="firstName"
-          label="First Name"
-          errors={errors}
-          register={register}
-          validations={{ required: true, maxLength: 80 }}
-        />
-        <Input
-          name="lastName"
-          label="Last Name"
-          errors={errors}
-          register={register}
-          validations={{ required: true, maxLength: 80 }}
-        />
-      </div>
+      <GroupedFieldsWithLabel>
+        <LargeLabel>Credit Card Information</LargeLabel>
+        <GroupedFields>
+          <Input
+            name="firstName"
+            label="First Name"
+            errors={errors}
+            register={register}
+            validations={{ required: true, maxLength: 80 }}
+          />
+          <GroupedFieldSpacing />
+          <Input
+            name="lastName"
+            label="Last Name"
+            errors={errors}
+            register={register}
+            validations={{ required: true, maxLength: 80 }}
+          />
+        </GroupedFields>
+      </GroupedFieldsWithLabel>
       <Input
         name="creditCardNumber"
         label="Credit Card Number"
@@ -83,7 +102,7 @@ export default function Form() {
         }}
         customErrorMessage="Please enter a valid credit card number"
       />
-      <div className="main-form__grouped-fields">
+      <GroupedFields>
         <Input
           name="expirationDate"
           label="Expiration Date (mm/yy)"
@@ -95,6 +114,7 @@ export default function Form() {
           }}
           customErrorMessage="Please enter a valid expiration date"
         />
+        <GroupedFieldSpacing />
         <Input
           name="cvv"
           label="CVV (3 or 4 Digits on Back of Card)"
@@ -106,9 +126,9 @@ export default function Form() {
           }}
           customErrorMessage="Please enter a valid CVV"
         />
-      </div>
+      </GroupedFields>
 
-      <label>Billing Address</label>
+      <LargeLabel>Billing Address</LargeLabel>
       <Input
         name="billingAddressStreet"
         label="Street"
@@ -118,7 +138,7 @@ export default function Form() {
           required: true,
         }}
       />
-      <div className="main-form__grouped-fields">
+      <GroupedFields>
         <Input
           name="billingAddressCity"
           label="City"
@@ -129,8 +149,9 @@ export default function Form() {
             maxLength: 80,
           }}
         />
-
+        <GroupedFieldSpacing />
         <StateSelect errors={errors} register={register} />
+        <GroupedFieldSpacing />
         <Input
           name="billingAddressZipCode"
           label="Zip Code"
@@ -142,7 +163,7 @@ export default function Form() {
           }}
           customErrorMessage="Please enter a valid zip code"
         />
-      </div>
+      </GroupedFields>
 
       <AuthorizationCheck errors={errors} register={register} />
 

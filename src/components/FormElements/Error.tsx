@@ -1,4 +1,12 @@
 import React from "react";
+import styled from "styled-components";
+
+const ErrorMessage = styled.div`
+  padding: 0.3rem 0;
+  text-align: left;
+  font-size: 0.85rem;
+  color: red;
+`;
 
 interface ErrorProps {
   errors: any;
@@ -12,13 +20,12 @@ export const Error: React.FC<ErrorProps> = ({
   label,
   customErrorMessage,
 }) => {
-  console.log("\x1b[41m%s \x1b[0m", "FIXME: [matt] errors", errors);
   switch (errors[name]?.type) {
     case "required":
       return !!customErrorMessage ? (
-        <div>{customErrorMessage}</div>
+        <ErrorMessage>{customErrorMessage}</ErrorMessage>
       ) : (
-        <div>{label} is required</div>
+        <ErrorMessage>{label} is required</ErrorMessage>
       );
     case "pattern":
       return !!customErrorMessage ? (

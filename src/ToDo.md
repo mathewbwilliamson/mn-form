@@ -1,6 +1,7 @@
+- Add an image and a title
 - Add the Signature pad thing
-- Add a date of submission
-- Finish basic form layout
+  DONE - Add a date of submission
+  DONE- Finish basic form layout
 - Make sure all validations work correctly
 - Build CSS for basic form layout and the errors
 - Make sure it submits to the spreadsheet correctly

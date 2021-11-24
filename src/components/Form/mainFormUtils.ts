@@ -16,6 +16,7 @@ export const createFormFromData = (data: MainForm) => {
   form.append("billingAddressState", data.billingAddressState);
   form.append("billingAddressZipCode", data.billingAddressZipCode);
   form.append("authorization", `${data.authorization}`);
+  form.append("submissionDate", new Date().toString());
 
   return form;
 };
