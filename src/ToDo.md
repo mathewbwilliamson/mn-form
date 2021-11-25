@@ -10,8 +10,8 @@ DONE - Get it uploaded to netlify, it should be secure!
 DONE - Rename the netlify location
 DONE - On submit, show a confirmation page
 DONE - Write up notes for self on how all of this works
+DONE - Change the title and the title favicon to something not react
 
-- Change the title and the title favicon to something not react
 - Write up email directions
 - Add an image
 - Add the Signature pad thing

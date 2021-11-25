@@ -8,7 +8,7 @@ export const Label = styled.label`
 `;
 
 export const LargeLabel = styled.label`
-  width: 100vw;
+  width: 100%;
   text-align: left;
   font-weight: 500;
   font-size: 1.2rem;
