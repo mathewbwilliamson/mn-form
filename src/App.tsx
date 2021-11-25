@@ -19,6 +19,10 @@ const FooterImageContainer = styled.div`
   background-color: black;
   width: 100vw;
   height: 83px;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `;
 
 const FooterImage = styled.img`
