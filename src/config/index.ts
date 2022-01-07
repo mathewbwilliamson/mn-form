@@ -4,3 +4,5 @@ export const scriptURL =
 export const emailAddressRegEx =
   // eslint-disable-next-line
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+export const sendGridAPIKey = process.env.REACT_APP_SEND_GRID_API_KEY || "";
