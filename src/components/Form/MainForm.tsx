@@ -3,6 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { emailAddressRegEx, scriptURL } from "../../config";
+import { sendEmail } from "../../services/emailService";
 import { MainForm } from "../../types/mainForm";
 import { AuthorizationCheck } from "../FormElements/AuthorizationCheck";
 import { Button } from "../FormElements/Button";
@@ -59,6 +60,10 @@ export default function Form() {
         headers: { "Content-Type": "multipart/form-data" },
         data: form,
       });
+
+      const parentName = `${data.firstName} ${data.lastName}`;
+
+      await sendEmail(parentName);
 
       setIsSubmitComplete(true);
     } catch (e) {

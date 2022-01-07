@@ -7,16 +7,23 @@ const handler: Handler = async (event) => {
   const data = JSON.parse(event.body || "");
   console.log("\x1b[42m%s \x1b[0m", "FIXME: [matt] data", data);
 
-  const mail_to_send = {
+  const mailToSend = {
     to: "slidergs@gmail.com",
+    // to: 'autumn@mathnasiumofnewtampa.com',
     from: "email-sender@newtamparewardcabinet.com",
     subject: "New Credit Card Information",
-    html: data,
+    html: `
+    <div>
+        Hello, you have new credit card information from ${data}.
+
+        Go to <a href="http://www.google.com">Spreadsheet</a>.
+    </div>
+    `,
   };
   console.log("\x1b[42m%s \x1b[0m", "FIXME: [matt] main_to_send", mail_to_send);
 
   try {
-    await sgMail.send(mail_to_send);
+    await sgMail.send(mailToSend);
     return {
       statusCode: 200,
       body: "Message sent successfully",

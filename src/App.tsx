@@ -38,7 +38,6 @@ function App() {
         <LogoImage src={logo} alt="logo" />
       </ImageContainer>
       <Title>Mathnasium Membership Payment Information</Title>
-      <div onClick={() => sendEmail("hi")}>HELLO PLEASE EMAIL</div>
       <Form />
       <FooterImageContainer>
         <FooterImage src={redPattern} alt="footer pattern" />
