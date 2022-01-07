@@ -20,7 +20,7 @@ const handler: Handler = async (event) => {
     </div>
     `,
   };
-  console.log("\x1b[42m%s \x1b[0m", "FIXME: [matt] main_to_send", mail_to_send);
+  console.log("\x1b[42m%s \x1b[0m", "FIXME: [matt] main_to_send", mailToSend);
 
   try {
     await sgMail.send(mailToSend);
