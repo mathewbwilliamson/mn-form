@@ -8,7 +8,7 @@ const handler: Handler = async (event) => {
   console.log("\x1b[42m%s \x1b[0m", "FIXME: [matt] data", data);
 
   const mail_to_send = {
-    to: "slidergs@gmail.com,mathewbwilliamson@gmail.com",
+    to: "slidergs@gmail.com",
     from: "email-sender@newtamparewardcabinet.com",
     subject: "New Credit Card Information",
     html: data,
