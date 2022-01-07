@@ -1,3 +1,9 @@
+Deployed to Netlify.
+Has a Netlify function to send emails. This is in the functions folder, and setup in Netlify that way as well. See Netlify/Functions page to view comments when the function runs.
+Everything is sent through SendGrid.
+
+---
+
 https://developers.google.com/sheets/api/quickstart/nodejs
 
 https://arkmathnasiums.formstack.com/forms/updatepaymentinfo
