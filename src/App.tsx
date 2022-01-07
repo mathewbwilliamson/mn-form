@@ -1,10 +1,9 @@
 import React from "react";
-import "./App.css";
-import Form from "./components/Form/MainForm";
 import styled from "styled-components";
+import "./App.css";
 import logo from "./assets/Mathnasium_logo.png";
 import redPattern from "./assets/PatternsNumbersRedSmall.jpg";
-import { sendEmail } from "./services/emailService";
+import Form from "./components/Form/MainForm";
 
 const ImageContainer = styled.div`
   background-color: black;
