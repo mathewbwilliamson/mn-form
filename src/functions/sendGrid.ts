@@ -5,7 +5,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
 
 const handler: Handler = async (event) => {
   const data = JSON.parse(event.body || "");
-  console.log("\x1b[42m%s \x1b[0m", "FIXME: [matt] data", data);
+  console.log("\x1b[42m%s \x1b[0m", "data", data);
 
   const mailToSend = {
     to: "slidergs@gmail.com",
@@ -14,13 +14,13 @@ const handler: Handler = async (event) => {
     subject: "New Credit Card Information",
     html: `
     <div>
-        Hello, you have new credit card information from ${data}.
+        <p>Hello, you have new credit card information from <strong>${data}</strong>.</p>
 
-        Go to <a href="http://www.google.com">Spreadsheet</a>.
+        <p>Go to the spreadsheet to update.</p>
     </div>
     `,
   };
-  console.log("\x1b[42m%s \x1b[0m", "FIXME: [matt] main_to_send", mailToSend);
+  console.log("\x1b[42m%s \x1b[0m", "mailToSend", mailToSend);
 
   try {
     await sgMail.send(mailToSend);
@@ -29,7 +29,7 @@ const handler: Handler = async (event) => {
       body: "Message sent successfully",
     };
   } catch (err: any) {
-    console.log("\x1b[41m%s \x1b[0m", "FIXME: [matt] err", err);
+    console.log("\x1b[41m%s \x1b[0m", "err", err);
     return {
       statusCode: err.code,
       body: err.message,
