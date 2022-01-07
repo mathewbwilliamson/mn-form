@@ -8,8 +8,8 @@ const handler: Handler = async (event) => {
   console.log("\x1b[42m%s \x1b[0m", "data", data);
 
   const mailToSend = {
-    to: "slidergs@gmail.com",
-    // to: 'autumn@mathnasiumofnewtampa.com',
+    // to: "slidergs@gmail.com",
+    to: "autumn@mathnasiumofnewtampa.com",
     from: "email-sender@newtamparewardcabinet.com",
     subject: "New Credit Card Information",
     html: `
